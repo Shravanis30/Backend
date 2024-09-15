@@ -1,0 +1,16 @@
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/coffees\",\"status\":\"201\",\"responseTime\":\"2.044\"}","timestamp":"2024-08-29T19:03:07.458Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/coffees\",\"status\":\"201\",\"responseTime\":\"0.477\"}","timestamp":"2024-08-29T19:03:09.927Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/coffees\",\"status\":\"201\",\"responseTime\":\"0.299\"}","timestamp":"2024-08-29T19:03:10.947Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/coffees\",\"status\":\"201\",\"responseTime\":\"0.349\"}","timestamp":"2024-08-29T19:03:11.839Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Its a post request nade ti add a new coffee","timestamp":"2024-08-29T19:05:21.388Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/coffees\",\"status\":\"201\",\"responseTime\":\"2.576\"}","timestamp":"2024-08-29T19:05:21.391Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Its a post request nade ti add a new coffee","timestamp":"2024-08-29T19:05:22.474Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/coffees\",\"status\":\"201\",\"responseTime\":\"0.430\"}","timestamp":"2024-08-29T19:05:22.475Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Its a post request nade ti add a new coffee","timestamp":"2024-08-29T19:05:23.378Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/coffees\",\"status\":\"201\",\"responseTime\":\"0.500\"}","timestamp":"2024-08-29T19:05:23.379Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Its a post request nade ti add a new coffee","timestamp":"2024-08-29T19:05:23.999Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/coffees\",\"status\":\"201\",\"responseTime\":\"0.376\"}","timestamp":"2024-08-29T19:05:24.000Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Its a post request nade ti add a new coffee","timestamp":"2024-08-29T19:05:24.374Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/coffees\",\"status\":\"201\",\"responseTime\":\"0.399\"}","timestamp":"2024-08-29T19:05:24.374Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Its a post request nade ti add a new coffee","timestamp":"2024-08-29T19:05:24.714Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/coffees\",\"status\":\"201\",\"responseTime\":\"0.502\"}","timestamp":"2024-08-29T19:05:24.715Z"}
