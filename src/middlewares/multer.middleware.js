@@ -5,7 +5,7 @@ import multer from "multer";
     cb(null, "./public/temp")
   },
   filename: function (req, file, cb) {
-    cb(null, file.orginalname)
+    cb(null, file.originalname); 
   }
 })
 
