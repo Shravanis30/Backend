@@ -33,7 +33,7 @@ router.route("/history").get(verifyJWT, getWatchHistory)
 
 // while getting the file data
 router.route("/avatar").post(verifyJWT, upload.single("avatar"), updateUserAvatar)
-router.route("/cover-image").posy(verifyJWT, upload.single("coverImage"), updateUserCoverImage)
+router.route("/cover-image").post(verifyJWT, upload.single("coverImage"), updateUserCoverImage)
 
 // while getting from url (params)
 router.route("/c/:username".get(verifyJWT, getUserChannelProfile))
