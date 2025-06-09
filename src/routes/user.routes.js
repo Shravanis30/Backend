@@ -36,6 +36,6 @@ router.route("/avatar").post(verifyJWT, upload.single("avatar"), updateUserAvata
 router.route("/cover-image").post(verifyJWT, upload.single("coverImage"), updateUserCoverImage)
 
 // while getting from url (params)
-router.route("/c/:username".get(verifyJWT, getUserChannelProfile))
+router.route("/c/:username").get(verifyJWT, getUserChannelProfile)
 
 export default router

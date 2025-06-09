@@ -4,6 +4,7 @@ import { User } from "../models/user.model.js"
 import { uploadOnCloudinary } from "../utils/cloudinary.js"
 import { ApiResponse } from "../utils/ApiResponse.js"
 import mongoose from "mongoose"
+import jwt from "jsonwebtoken";
 
 const generaterAccessAndRefreshToken = async (userId) => {
     try {
@@ -20,7 +21,6 @@ const generaterAccessAndRefreshToken = async (userId) => {
         throw new ApiError(500, "Something went wrong while generating refersh and access tokens")
     }
 }
-
 
 const registerUser = asyncHandler(async (req, res) => {
     // testing
@@ -182,8 +182,8 @@ const logoutUser = asyncHandler(async(req, res) => {
     await User.findByIdAndUpdate(
         req.user._id,
         {
-            $set:{
-                refreshToken: undefined
+            $unset:{
+                refreshToken: 1
             }
         },
         {
@@ -210,7 +210,7 @@ const logoutUser = asyncHandler(async(req, res) => {
 })
 
 const refreshAccessToken = asyncHandler(async(req, res) => {
-    const incomingRefreshToken = req.cookie.refershToken || req.body.refreshToken
+    const incomingRefreshToken = req.cookies.refreshToken || req.body.refreshToken
 
     if(!incomingRefreshToken){
         throw new ApiError(401, "Unauthorized request")
@@ -229,7 +229,7 @@ const refreshAccessToken = asyncHandler(async(req, res) => {
     
         }
     
-        if(incomingRefreshToken !== user?.refershToken) {
+        if (incomingRefreshToken !== user?.refreshToken) {
             throw new ApiError(401, "Refresh token is expired or used")
         }
     
@@ -260,7 +260,7 @@ const refreshAccessToken = asyncHandler(async(req, res) => {
 })
 
 const changeCurrentPassword = asyncHandler(async(req, res) => {
-    const {oldPassword, newPassword} = res.body
+    const {oldPassword, newPassword} = req.body
 
     const user = await User.findById(req.user?._id)
     const isPasswordCorrect = await user.isPasswordCorrect(oldPassword)
@@ -283,7 +283,13 @@ const changeCurrentPassword = asyncHandler(async(req, res) => {
 const getCurrentUser = asyncHandler(async(req, res) => {
     return res
     .status(200)
-    .json(200, req.user, "Current user password fetched successfully")
+    .json(
+        new ApiResponse(
+            200, 
+            req.user, 
+            "User fetched successfully"
+        )
+    )
 })
 
 const updateAccountDetails = asyncHandler(async(req, res) => {
@@ -293,7 +299,7 @@ const updateAccountDetails = asyncHandler(async(req, res) => {
         throw new ApiError(400, "All fields are required")
     }
 
-    User.findByIdAndUpdate(
+    const user = await User.findByIdAndUpdate(
         req.user?._id,
         {
             $set: {
@@ -307,7 +313,7 @@ const updateAccountDetails = asyncHandler(async(req, res) => {
     return res
     .status(200)
     .json(
-        new ApiResponse(400, user, "Account details updated succesfully")
+        new ApiResponse(200, user, "Account details updated succesfully")
     )
 })
 
@@ -319,16 +325,7 @@ const updateUserAvatar = asyncHandler(async(req, res) => {
     
     }
 
-    //  Delete old avatar if exists
-    if (user.avatar) {
-        try {
-            const publicId = getCloudinaryPublicId(user.avatar);
-            await cloudinary.uploader.destroy(publicId);
-        } catch (error) {
-            console.error("Error deleting old avatar from Cloudinary:", error.message);
-        }
-    }
-
+   
     const avatar = await uploadOnCloudinary(avatarLocalPath)
 
     if(!avatar.url) {
@@ -344,6 +341,17 @@ const updateUserAvatar = asyncHandler(async(req, res) => {
         },
         {new: true}
     ).select("-password")
+
+    //  Delete old avatar if exists
+    // if (user.avatar) {
+    //     try {
+    //         const publicId = getCloudinaryPublicId(user.avatar);
+    //         await cloudinary.uploader.destroy(publicId);
+    //     } catch (error) {
+    //         console.error("Error deleting old avatar from Cloudinary:", error.message);
+    //     }
+    // }
+
 
     return res
     .status(200)
@@ -427,7 +435,7 @@ const getUserChannelProfile = asyncHandler(async(req, res) => {
                     $size: "$subscribers"
                 },
                 channelsSubscibedToCount: {
-                    $size: "subscribedTo"
+                    $size: "$subscribedTo"
                 },
                 isSubscibed: {
                     $cond: {
@@ -443,9 +451,9 @@ const getUserChannelProfile = asyncHandler(async(req, res) => {
                 fullName: 1,
                 email: 1,
                 username: 1,
-                subscibersCount,
-                channelsSubscibedToCount,
-                isSubscibed
+                subscibersCount: 1,
+                channelsSubscibedToCount: 1,
+                isSubscibed: 1,
             }
         }
     ])
